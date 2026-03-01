@@ -1,0 +1,21 @@
+[Unit]
+Description=Ollama 0.12.3 with ROCm GPU Support
+After=network-online.target
+
+[Container]
+AddDevice=/dev/kfd:/dev/kfd
+AddDevice=/dev/dri:/dev/dri
+ContainerName=ollama
+Image=docker.io/ollama/ollama:0.12.3-rocm
+Pod=ollama.pod
+Volume=ollama:/root/.ollama:Z
+SecurityLabelType=container_runtime_t
+GroupAdd=keep-groups
+Environment="HSA_OVERRIDE_GFX_VERSION=9.0.6"
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target default.target

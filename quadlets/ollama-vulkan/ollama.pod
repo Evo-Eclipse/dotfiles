@@ -1,0 +1,8 @@
+[Pod]
+PodName=ollama
+
+# Ollama API
+PublishPort=11434:11434
+
+[Install]
+WantedBy=multi-user.target default.target
